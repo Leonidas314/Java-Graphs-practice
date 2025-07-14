@@ -8,12 +8,15 @@
 
 plugins {
     id 'java'
+    id 'application'
 }
 group = "leon.proyectos"
 repositories {
     mavenCentral()
 }
-
+application {
+    mainClass = 'com.graphs.Main'
+}
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
 }

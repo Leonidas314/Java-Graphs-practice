@@ -3,3 +3,11 @@
 
 # Ignore Gradle build output directory
 build
+
+#Dont ignore wrapper
+!gradle/wrapper/gradle-wrapper.jar
+# === Java ===
+*.class
+*.jar
+*.war
+*.ear
