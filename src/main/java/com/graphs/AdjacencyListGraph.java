@@ -2,7 +2,7 @@ package com.graphs;
 import java.util.List;
 import java.util.LinkedList;
 import java.util.Iterator;
-public class AdjacencyListGraph{
+public class AdjacencyListGraph implements IntGraph{
     private int E;
     private int V;
     private List<Integer>[] adj;
@@ -23,6 +23,13 @@ public class AdjacencyListGraph{
     }
     public int E(){
         return E;
+    }
+    public List<Integer> adj(int v){
+        List result = new LinkedList<Integer>();
+        for(Integer curr : adj[v]){
+            result.add(curr);
+        }
+        return result;
     }
     public String toString() {
     StringBuilder res = new StringBuilder();
