@@ -1,5 +1,8 @@
 package com.graphs;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import com.graphs.IntGraph;
 
 public class DeepFirstSearch<G extends IntGraph>{
@@ -20,6 +23,14 @@ public class DeepFirstSearch<G extends IntGraph>{
                 dfs(G, currAdj);
             }
         }
+    }
+     public List pathTo(int d){
+        List path = new LinkedList<Integer>();
+        for(int x=d; x!= this.source; x=edgeTo[x]){
+            path.addFirst(x);
+        }
+        path.addFirst(this.source);
+        return path;
     }
     public String toString(){
         StringBuilder res = new StringBuilder();

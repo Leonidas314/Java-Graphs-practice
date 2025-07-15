@@ -31,6 +31,7 @@ public class AdjacencyListGraph implements IntGraph{
         }
         return result;
     }
+   
     public String toString() {
     StringBuilder res = new StringBuilder();
     for (int i = 0; i < adj.length; i++) {
