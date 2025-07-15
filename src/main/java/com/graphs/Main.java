@@ -2,6 +2,7 @@ package com.graphs;
 
 import com.graphs.BreadthFirstSearch;
 import com.graphs.DeepFirstSearch;
+import com.graphs.Dijkstra;
 import com.graphs.MatrixIntegerGraph;
 import com.graphs.AdjacencyListWeightedGraph;
 public class Main {
@@ -48,5 +49,7 @@ public class Main {
         GW1.addEdge(2,5,2);
         System.out.println("Mi grafo con pesos:");
         System.out.println(GW1);
+        Dijkstra djk = new Dijkstra<>(GW1, 0);
+        System.out.println(djk);
     }
 }
