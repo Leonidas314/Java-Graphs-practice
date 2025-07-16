@@ -21,7 +21,7 @@ public class AdjacencyListWeightedGraph implements WeightedGraph {
     public int V(){
         return this.V;
     }
-    public void addEdge(int from, int to, int weight){
+    public void addEdge(int from, int to, double weight){
         if(from > this.V || to > this.V) throw new IllegalArgumentException();
         EdgeWeighted e = new EdgeWeighted(from, to, weight);
         adj[from].add(e);

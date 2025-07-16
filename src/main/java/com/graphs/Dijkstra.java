@@ -3,26 +3,28 @@ import com.graphs.IndexMinPQ;
 import com.graphs.WeightedGraph;
 
 import java.security.spec.EdDSAParameterSpec;
+import java.util.LinkedList;
+import java.util.List;
 
 import com.graphs.AdjacencyListWeightedGraph;
 import com.graphs.EdgeWeighted;
 public class Dijkstra<E extends EdgeWeighted> {
-    private int[] distTo;
+    private double[] distTo;
     private int[] edgeTo;
     private int s;
     private IndexMinPQ PQ;
     public Dijkstra(WeightedGraph<E> G, int s){
-        distTo = new int[G.V()];
+        distTo = new double[G.V()];
         for (int i = 0; i < distTo.length; i++) {
-            distTo[i] =Integer.MAX_VALUE; 
+            distTo[i] = Double.POSITIVE_INFINITY; 
         }
-        distTo[s]= 0;
+        distTo[s]= 0.0;
         edgeTo = new int[G.V()];
         PQ = new IndexMinPQ(G.V());
         dijkstra(G,s);
     }
-    private void dijkstra(WeightedGraph<E> G, int s){
-        PQ.insert(s,0);
+    private void dijkstra(WeightedGraph<E> G,int s){
+        PQ.insert(s,0.0);
         while(!PQ.isEmpty()){
             int v = PQ.delMin();
             for (EdgeWeighted e : G.adj(v)) {
@@ -33,7 +35,7 @@ public class Dijkstra<E extends EdgeWeighted> {
     private void relax(EdgeWeighted e){
         int from=e.from();
         int to = e.to();
-        int w = e.weight();
+        double w = e.weight();
         if(distTo[to]>distTo[from]+w){
             distTo[to] = distTo[from]+w;
             edgeTo[to] = from;
@@ -44,8 +46,18 @@ public class Dijkstra<E extends EdgeWeighted> {
             }
         }        
     }
+    public List<Integer> pathTo(int w){
+        List<Integer> path = new LinkedList<>();
+        for(int x = w; x != s ;x=edgeTo[x]){
+            path.add(x);
+        }
+        path.addLast(s);
+        return path;
+    }
+
     public String toString(){
         StringBuilder res = new StringBuilder();
+        res.append("distTo -> edgeTo\n");
         for (int i = 0; i < distTo.length; i++) {
             res.append(distTo[i] + "->" + edgeTo[i] +"\n");
         }

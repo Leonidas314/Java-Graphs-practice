@@ -17,7 +17,7 @@ public int E();
 /**
 * @pre 0 <= v < V && 0 <= w < V
 * @post Adds the undirected edge v-w to this graph. */
-public void addEdge(int from, int to, int weight);
+public void addEdge(int from, int to, double weight);
 /**
 * @pre 0 <= v < V
 * @post Returns the list of vertices adjacent to vertex v.*/

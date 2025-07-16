@@ -3,8 +3,8 @@ package com.graphs;
 public class EdgeWeighted {
     private int from;
     private int to;
-    private int weight;
-    public EdgeWeighted(int from, int to, int weight){
+    private double weight;
+    public EdgeWeighted(int from, int to, double weight){
         this.from=from;
         this.to=to;
         this.weight=weight;
@@ -15,7 +15,7 @@ public class EdgeWeighted {
     public int to(){
         return this.to;
     }
-    public int weight(){
+    public double weight(){
         return this.weight;
     }
     public String toString(){

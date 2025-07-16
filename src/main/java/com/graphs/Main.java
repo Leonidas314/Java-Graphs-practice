@@ -40,16 +40,25 @@ public class Main {
         System.out.println("BFS:");
         System.out.println(bfs1);*/
 
-        AdjacencyListWeightedGraph GW1 = new AdjacencyListWeightedGraph(6);
-        GW1.addEdge(0,1,1);
-        GW1.addEdge(1,2,1);
-        GW1.addEdge(0,3,2);
-        GW1.addEdge(3,4,1);
-        GW1.addEdge(4,5,1);
-        GW1.addEdge(2,5,2);
+        AdjacencyListWeightedGraph GW1 = new AdjacencyListWeightedGraph(9);
+        GW1.addEdge(0, 1, 2.0);
+        GW1.addEdge(0, 4, 3.0);
+        GW1.addEdge(1, 2, 2.0);
+        GW1.addEdge(1, 4, 5.0);
+        GW1.addEdge(1, 5, 1.0);
+        GW1.addEdge(2, 5, 1.0);
+        GW1.addEdge(3, 6, 10.0);
+        GW1.addEdge(3, 7, 2.0);
+        GW1.addEdge(4, 3, 1.0);
+        GW1.addEdge(4, 8, 7.0);
+        GW1.addEdge(5, 4, 1.0);
+        GW1.addEdge(5, 8, 10.0);
+        GW1.addEdge(7, 8, 1.0);
+
         System.out.println("Mi grafo con pesos:");
         System.out.println(GW1);
         Dijkstra djk = new Dijkstra<>(GW1, 0);
         System.out.println(djk);
+        System.out.println(djk.pathTo(8));
     }
 }
