@@ -18,6 +18,11 @@ public class EdgeWeighted {
     public double weight(){
         return this.weight;
     }
+    public int other(int w){
+        if(w==to) return from;
+        if(w==from) return to;
+        else throw new IllegalArgumentException();
+    }
     public String toString(){
         StringBuilder res = new StringBuilder();
         res.append("{ ");

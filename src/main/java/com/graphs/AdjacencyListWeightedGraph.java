@@ -27,6 +27,15 @@ public class AdjacencyListWeightedGraph implements WeightedGraph {
         adj[from].add(e);
         E++;
     }
+    public List<EdgeWeighted> edges(){
+        List<EdgeWeighted> edges = new LinkedList<EdgeWeighted>();
+        for(int i = 0 ; i < this.V; i++){
+            for(EdgeWeighted e : adj[i]){
+                edges.add(e);
+            }
+        }
+        return edges;
+    }
     public List<EdgeWeighted> adj(int v){
         List<EdgeWeighted> adj = new LinkedList<>();
         for (EdgeWeighted e : this.adj[v]) {

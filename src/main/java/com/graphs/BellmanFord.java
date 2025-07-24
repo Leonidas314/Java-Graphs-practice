@@ -3,37 +3,51 @@ import com.graphs.*;
 public class BellmanFord<E extends EdgeWeighted> {
     private double[] distTo;
     private int[] edgeTo;
-    public BellmanFord(WeightedGraph<E> G){
-        distTo = new double[G.V()];
-        for(int i = 0; i < distTo.length; i++){
-            distTo[i] = Double.POSITIVE_INFINITY;
-        }
-        edgeTo = new int[G.V()];
-        bellmanFord(G);
-    }
-    private boolean bellmanFord(WeightedGraph<E> G){
-        for(int k = 1 ; k <= G.V() - 1; k++){
-            for(int i = 0; i < G.V() ; i++){
-                for(EdgeWeighted e : G.adj(i)){
-                    relax(e);
-                }
-            }   
-        }
-        for(int i = 0; i < G.V() ; i++){
-            for(EdgeWeighted e : G.adj(i)){
-                if(distTo[e.to()]>distTo[e.from()]+e.weight());
-                return false;
+    private int s;
+    private boolean hasNegativeCicles;
+    public BellmanFord(WeightedGraph<E> G, int s){
+        this.s = s;
+        this.hasNegativeCicles=false;
+        this.edgeTo = new int[G.V()];
+        this.distTo = new double[G.V()];
+        for(int i = 0 ; i < G.V(); i ++){
+            if(i != s){
+                distTo[i]= Double.MAX_VALUE;
             }
         }
-        return true;  
+        distTo[s] = 0;
+        bellmanford(G,s);
+        this.hasNegativeCicles=hasNegativeCicles(G);
+    }
+    private void bellmanford(WeightedGraph<E> G, int s){
+        for(int i = 0 ; i < G.V() - 1 ; i++){
+            for(EdgeWeighted e : G.edges()){
+                relax(e);
+            }
+        }
+    }
+    private boolean hasNegativeCicles(WeightedGraph<E> G){
+        
+        for(EdgeWeighted e : G.edges()){
+            int to = e.to();
+            int from = e.from();
+            int w = e.weight();
+            if(distTo[from]!=Double.MAX_VALUE && distoTo[to]>distTo[from]+ w){
+                return true;
+            }
+        }
+        return false;
     }
     private void relax(EdgeWeighted e){
         int from = e.from();
         int to = e.to();
-        double w = e.weight();
-        if(distTo[to] > distTo[from] + w){
-            distTo[to] = distTo[from] + w;
-            edgeTo[to] = from;
+        double w  = e.weight();
+        if(distTo[to]>distTo[from]+w){
+            distTo[to]=distTo[from] + w;
+            edgeTo[to]= from;
         }
+    }
+    public boolean hasNegCicl(){
+        return this.hasNegativeCicles;
     }
 }
