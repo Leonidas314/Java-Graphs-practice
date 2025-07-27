@@ -3,6 +3,7 @@ package com.graphs;
 import com.graphs.BreadthFirstSearch;
 import com.graphs.DeepFirstSearch;
 import com.graphs.Dijkstra;
+import com.graphs.FloydWarshall;
 import com.graphs.MatrixIntegerGraph;
 import com.graphs.AdjacencyListWeightedGraph;
 public class Main {
@@ -57,8 +58,20 @@ public class Main {
 
         System.out.println("Mi grafo con pesos:");
         System.out.println(GW1);
-        Dijkstra djk = new Dijkstra<>(GW1, 0);
+       /*  Dijkstra djk = new Dijkstra<>(GW1, 0);
         System.out.println(djk);
-        System.out.println(djk.pathTo(8));
+        System.out.println(djk.pathTo(8));*/
+        AdjacencyListWeightedGraph GW2 = new AdjacencyListWeightedGraph(5);
+        GW2.addEdge(0, 1, 3);
+        GW2.addEdge(0, 2, 8);
+        GW2.addEdge(0, 4, -4);
+        GW2.addEdge(1, 3, 1);
+        GW2.addEdge(1, 4, 7);
+        GW2.addEdge(2, 1, 4);
+        GW2.addEdge(3, 2, -5);
+        GW2.addEdge(3, 0, 2);
+        GW2.addEdge(4, 3, 6);
+        FloydWarshall FW = new FloydWarshall(GW2);
+        System.out.println(FW);
     }
 }

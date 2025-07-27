@@ -10,7 +10,7 @@ import com.graphs.AdjacencyListWeightedGraph;
 import com.graphs.EdgeWeighted;
 public class Dijkstra<E extends EdgeWeighted> {
     private double[] distTo;
-    private int[] edgeTo;
+    private EdgeWeighted[] edgeTo;
     private int s;
     private IndexMinPQ PQ;
     public Dijkstra(WeightedGraph<E> G, int s){
@@ -19,7 +19,7 @@ public class Dijkstra<E extends EdgeWeighted> {
             distTo[i] = Double.POSITIVE_INFINITY; 
         }
         distTo[s]= 0.0;
-        edgeTo = new int[G.V()];
+        edgeTo = new EdgeWeighted[G.V()];
         PQ = new IndexMinPQ(G.V());
         dijkstra(G,s);
     }
@@ -38,20 +38,22 @@ public class Dijkstra<E extends EdgeWeighted> {
         double w = e.weight();
         if(distTo[to]>distTo[from]+w){
             distTo[to] = distTo[from]+w;
-            edgeTo[to] = from;
-            if(!PQ.contains(to)){
-                PQ.insert(to,distTo[from]+w);
+            edgeTo[to] = e;
+            if(PQ.contains(to)){
+                PQ.decreaseKey(to,distTo[from]+w);
             }else{
-                PQ.change(to,distTo[from]+w);
+                PQ.insert(to,distTo[from]+w);
             }
         }        
     }
     public List<Integer> pathTo(int w){
         List<Integer> path = new LinkedList<>();
-        for(int x = w; x != s ;x=edgeTo[x]){
-            path.add(x);
+
+        for(int x = w; x != s ;x=edgeTo[x].from()){
+            path.addFirst(x);
         }
-        path.addLast(s);
+        path.addFirst(s);
+
         return path;
     }
 

@@ -1,5 +1,7 @@
 package com.graphs;
 import com.graphs.*;
+import java.util.List;
+import java.util.LinkedList;
 public class BellmanFord<E extends EdgeWeighted> {
     private double[] distTo;
     private int[] edgeTo;
@@ -20,8 +22,9 @@ public class BellmanFord<E extends EdgeWeighted> {
         this.hasNegativeCicles=hasNegativeCicles(G);
     }
     private void bellmanford(WeightedGraph<E> G, int s){
+        List<E> edges = G.edges();
         for(int i = 0 ; i < G.V() - 1 ; i++){
-            for(EdgeWeighted e : G.edges()){
+            for(EdgeWeighted e : edges){
                 relax(e);
             }
         }
@@ -31,8 +34,8 @@ public class BellmanFord<E extends EdgeWeighted> {
         for(EdgeWeighted e : G.edges()){
             int to = e.to();
             int from = e.from();
-            int w = e.weight();
-            if(distTo[from]!=Double.MAX_VALUE && distoTo[to]>distTo[from]+ w){
+            double w = e.weight();
+            if(distTo[from]!=Double.MAX_VALUE && distTo[to]>distTo[from]+ w){
                 return true;
             }
         }
