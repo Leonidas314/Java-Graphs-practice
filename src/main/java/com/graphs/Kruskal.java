@@ -33,7 +33,7 @@ public class Kruskal {
             if(uf.find(v)!=uf.find(u)){
                 uf.union(u, v);
                 mst.add(e);
-
+                weight += e.weight();
             }
         }
     }

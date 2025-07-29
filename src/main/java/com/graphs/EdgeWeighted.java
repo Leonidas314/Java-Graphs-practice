@@ -32,4 +32,8 @@ public class EdgeWeighted {
         res.append(" }");
         return res.toString();
     }
+    
+    public int compareTo(EdgeWeighted other){
+        return Double.compare(this.weight(),other.weight());
+    }
 }
